@@ -82,6 +82,10 @@ class BookTest extends TestCase
         	->assertStatus(200)
         	
         	;
+         $this->assertDatabaseMissing('books', [
+            'name' => $book->name
+            
+        ]);    
     }
 
     public function test_create_book()
@@ -99,5 +103,10 @@ class BookTest extends TestCase
         	->assertStatus(200)
         	->assertJson(['name'=> $book->name])
         ;
+
+        $this->assertDatabaseHas('books', [
+            'name' => $book->name
+            
+        ]);
     }
 }
